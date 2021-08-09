@@ -28,27 +28,48 @@ html, body {
     grid-area: zero;
 }
 
-
-.grid-item {
-    border: 1px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#divide {
+    grid-area: divide;
 }
+
+#multiply {
+    grid-area: multiply;
+}
+
+#minus {
+    grid-area: minus;
+}
+
+#plus {
+    grid-area: plus;
+}
+
+#equal {
+    grid-area: equal;
+}
+
 
 
 #grid {
     margin: 5px;
     display: grid;
     grid-template: 
-        "clear clear back back"
-        "plusorminus square root divide"
-        "seven eight nine multiply"
-        "four five six minus"
-        "one two three plus"
+        "clear clear back divide"
+        "plusorminus square root multiply"
+        "seven eight nine minus"
+        "four five six plus"
+        "one two three equal"
         "zero zero decimal equal";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     height: 340px;
     gap: 5px;
+}
+
+.grid-item {
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #copyright {
