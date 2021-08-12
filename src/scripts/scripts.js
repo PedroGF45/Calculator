@@ -1,16 +1,14 @@
-//procurar fazer com based on string
-
 
 const defaultNumber = null;
-
 let currentNumber = null;
+
 let previousNumber = null;
 let currentOperator = "";
 
 //updates de current operator being used
-function updateOperator(operand) {
-    currentOperator = operand;
-    cache.innerText += `${operand}`;
+function updateOperator(signal) {
+    currentOperator = signal;
+    cache.innerText += `${signal}`;
 }
 
 //updates the number in the display bottom portion
@@ -23,7 +21,6 @@ function updateDisplay(num) {
 //updates the number in the display top portion
 function updateCache(value) {
     cache.innerText += `${value}`;
-    console.log(cache);
 }
 
 
@@ -54,7 +51,7 @@ function add(a, b) {
         display.innerText = result;
         previousNumber = result;
         currentNumber = null;
-        cache.innerText = `${result}+`;
+        cache.innerText = `${result}${currentOperator}`;
 }
 
 function subtract(a, b) {
@@ -62,29 +59,23 @@ function subtract(a, b) {
     display.innerText = result;
     previousNumber = result;
     currentNumber = null;
-    cache.innerText = `${result}-`;
+    cache.innerText = `${result}${currentOperator}`;
 }
 
 function multiply(a, b) {
-    updateCache(" x ");
-    display.innerText = currentNumber;
-    if (a != null && b != null) {
-        let result = (a * b);
-        display.innerText = result;
-        currentNumber = result;
-        previousNumber = null;
-    } 
+    let result = (a * b);
+    display.innerText = result;
+    previousNumber = result;
+    currentNumber = null;
+    cache.innerText = `${result}${currentOperator}`;
 }
 
 function divide(a, b){
-    updateCache(" / ");
-    display.innerText = currentNumber;
-    if (a != null && b != null) {
-        let result = (a / b);
-        display.innerText = result;
-        currentNumber = result;
-        previousNumber = null;
-    } 
+    let result = (a/b);
+    display.innerText = result;
+    previousNumber = result;
+    currentNumber = null;
+    cache.innerText = `${result}${currentOperator}`;
 }
 
 //choses the operation based on id of the button clicked
@@ -111,9 +102,17 @@ function operate(operand) {
 
 
 function evaluate() {
-    if (currentOperator == "+" && cache.innerText.length > 2) {
-        add(previousNumber, currentNumber);
-    } else if (currentOperator == "-" && cache.innerText.length > 2) {
-        subtract(previousNumber, currentNumber);
+    console.log(cache.innerText);
+    for(let i = 0; i < cache.innerText.length; i++) {
+        if (cache.innerText[i] == "+" && cache.innerText.length > 2) {
+            add(previousNumber, currentNumber);
+        } else if (cache.innerText[i] == "-" && cache.innerText.length > 2) {
+            subtract(previousNumber, currentNumber);
+        } else if (cache.innerText[i] == "x" && cache.innerText.length > 2) {
+            multiply(previousNumber, currentNumber);
+        } else if (cache.innerText[i] == "/" && cache.innerText.length > 2) {
+            divide(previousNumber, currentNumber);
+        }
     }
+    
 }
