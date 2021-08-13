@@ -11,8 +11,6 @@ function updateDisplay(value) {
         cache.innerText += `${value}`;
         currentOperator != "" ? currentNumber += `${value}` : previousNumber += `${value}`;
         currentOperator != "" ? display.innerText = currentNumber : display.innerText += `${value}`;
-        console.log(`previous is ${previousNumber}`);
-        console.log(`current is ${currentNumber}`);
 }
 
 //updates de current operator being used
@@ -42,11 +40,9 @@ function clearDisplay() {
     currentOperator = "";
 }
 
-
 //operator functions
 function add(a, b) {
     let result = (Number(a) + Number(b));
-    console.log(result);
     display.innerText = result;
     previousNumber = result;
     currentNumber = "";
@@ -62,6 +58,8 @@ function subtract(a, b) {
 }
 
 function multiply(a, b) {
+    console.log(`a ${a}`);
+    console.log(`b ${b}`);
     let result = (Number(a) * Number(b));
     display.innerText = result;
     previousNumber = result;
@@ -106,9 +104,9 @@ function evaluate() {
             add(previousNumber, currentNumber);
         } else if (cache.innerText[i] == "-" && cache.innerText.length > 2) {
             subtract(previousNumber, currentNumber);
-        } else if (cache.innerText[i] == "x" && cache.innerText.length > 2) {
+        } else if (cache.innerText[i] == "x" && cache.innerText.length > 3) {
             multiply(previousNumber, currentNumber);
-        } else if (cache.innerText[i] == "/" && cache.innerText.length > 2) {
+        } else if (cache.innerText[i] == "/" && cache.innerText.length > 3) {
             divide(previousNumber, currentNumber);
         }
     } 
