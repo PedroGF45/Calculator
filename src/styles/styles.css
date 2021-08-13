@@ -58,6 +58,9 @@ html, body {
     grid-area: equal;
 }
 
+.number {
+    font-weight: bold;
+}
 
 
 #grid {

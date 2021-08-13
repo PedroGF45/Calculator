@@ -1,28 +1,25 @@
 
 const defaultNumber = null;
-let currentNumber = null;
-
-let previousNumber = null;
+let currentNumber = "";
+let previousNumber = "";
 let currentOperator = "";
+
+
+
+//updates the number in the display bottom portion
+function updateDisplay(value) {
+        cache.innerText += `${value}`;
+        currentOperator != "" ? currentNumber += `${value}` : previousNumber += `${value}`;
+        currentOperator != "" ? display.innerText = currentNumber : display.innerText += `${value}`;
+        console.log(`previous is ${previousNumber}`);
+        console.log(`current is ${currentNumber}`);
+}
 
 //updates de current operator being used
 function updateOperator(signal) {
     currentOperator = signal;
     cache.innerText += `${signal}`;
 }
-
-//updates the number in the display bottom portion
-function updateDisplay(num) {
-    display.innerText = `${num}`;
-    (previousNumber == null) ? previousNumber = Number(num) : currentNumber = Number(num);
-    updateCache(`${num}`);
-}
-
-//updates the number in the display top portion
-function updateCache(value) {
-    cache.innerText += `${value}`;
-}
-
 
 //Get numbers and operators
 let operator = document.querySelectorAll(".operator");
@@ -38,43 +35,45 @@ clear.addEventListener("click", clearDisplay);
 
 //Clear function
 function clearDisplay() {
-    display.innerText = null;
+    display.innerText = "";
     cache.innerText = "";
-    currentNumber = null;
-    previousNumber = null;
+    currentNumber = "";
+    previousNumber = "";
+    currentOperator = "";
 }
 
 
 //operator functions
 function add(a, b) {
-        let result = a + b;
-        display.innerText = result;
-        previousNumber = result;
-        currentNumber = null;
-        cache.innerText = `${result}${currentOperator}`;
+    let result = (Number(a) + Number(b));
+    console.log(result);
+    display.innerText = result;
+    previousNumber = result;
+    currentNumber = "";
+    cache.innerText = `${result}${currentOperator}`;
 }
 
 function subtract(a, b) {
-    let result = (a-b);
+    let result = (Number(a) - Number(b));
     display.innerText = result;
     previousNumber = result;
-    currentNumber = null;
+    currentNumber = "";
     cache.innerText = `${result}${currentOperator}`;
 }
 
 function multiply(a, b) {
-    let result = (a * b);
+    let result = (Number(a) * Number(b));
     display.innerText = result;
     previousNumber = result;
-    currentNumber = null;
+    currentNumber = "";
     cache.innerText = `${result}${currentOperator}`;
 }
 
 function divide(a, b){
-    let result = (a/b);
+    let result = (Number(a) / Number(b));
     display.innerText = result;
     previousNumber = result;
-    currentNumber = null;
+    currentNumber = "";
     cache.innerText = `${result}${currentOperator}`;
 }
 
@@ -100,9 +99,8 @@ function operate(operand) {
     }
 }
 
-
+//choses the function to operate based on the operator
 function evaluate() {
-    console.log(cache.innerText);
     for(let i = 0; i < cache.innerText.length; i++) {
         if (cache.innerText[i] == "+" && cache.innerText.length > 2) {
             add(previousNumber, currentNumber);
@@ -113,6 +111,5 @@ function evaluate() {
         } else if (cache.innerText[i] == "/" && cache.innerText.length > 2) {
             divide(previousNumber, currentNumber);
         }
-    }
-    
+    } 
 }
