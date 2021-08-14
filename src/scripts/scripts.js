@@ -73,6 +73,7 @@ function divide(a, b){
     getResult(result);
 }
 
+//If the signal is equal display the equation on display.
 function getResult(result) {
     display.innerText = result;
     if (previousOperator == "=") {
@@ -107,18 +108,38 @@ function operate(operand) {
             updateOperator("=");
             evaluate();
             break;
+        case "plusOrMinus":
+            if (previousOperator == "") {
+                if (!previousNumber.includes("-")) {
+                    display.innerText = "-" + display.innerText;
+                    previousNumber = "-" + previousNumber;
+                } else {
+                    display.innerText = display.innerText.substr(1);
+                    previousNumber = previousNumber.substr(1);
+                }
+            } else {
+                if (!currentNumber.includes("-")) {
+                    display.innerText = "-" + display.innerText;
+                    currentNumber = "-" + currentNumber;
+                } else {
+                    display.innerText = display.innerText.substr(1);
+                    currentNumber = currentNumber.substr(1);
+                }
+            }
+            console.log(previousNumber);
+            console.log(currentNumber);
     }
 }
 
 //choses the function to operate based on the operator
 function evaluate() {
-    if (currentOperator == "+" && cache.innerText.length > 1 || (currentOperator == "+" && previousOperator == "=")) {
+    if (currentOperator == "+" && cache.innerText.length > 1 || (currentOperator == "+" && previousOperator == "=" && cache.innerText.length > 1)) {
         add(previousNumber, currentNumber);
-    } else if (currentOperator == "-" && cache.innerText.length > 1) {
+    } else if (currentOperator == "-" && cache.innerText.length > 1 || (currentOperator == "-" && previousOperator == "=" && cache.innerText.length > 1)) {
         subtract(previousNumber, currentNumber);
-    } else if (currentOperator == "x" && cache.innerText.length > 1) {
+    } else if (currentOperator == "x" && cache.innerText.length > 1 || (currentOperator == "x" && previousOperator == "=" && cache.innerText.length > 1)) {
         multiply(previousNumber, currentNumber);
-    } else if (currentOperator == "/" && cache.innerText.length > 1) {
+    } else if (currentOperator == "/" && cache.innerText.length > 1 || (currentOperator == "/" && previousOperator == "=" && cache.innerText.length > 1)) {
         divide(previousNumber, currentNumber);
     }
 }
