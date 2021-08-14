@@ -54,9 +54,12 @@ function clearDisplay() {
 
 //operator functions
 function add(a, b) {
+    console.log(`a is ${a}`);
+    console.log(`b is ${b}`);
     let result = (Number(a) + Number(b));
     display.innerText = result;
     previousNumber = result;
+    console.log(`result is ${result}`);
     currentNumber = "";
     cache.innerText = `${result}${previousOperator}`;
 }
@@ -70,9 +73,12 @@ function subtract(a, b) {
 }
 
 function multiply(a, b) {
+    console.log(`a is ${a}`);
+    console.log(`b is ${b}`);
     let result = (Number(a) * Number(b));
     display.innerText = result;
     previousNumber = result;
+    console.log(`result is ${result}`);
     currentNumber = "";
     cache.innerText = `${result}${previousOperator}`;
 }
@@ -109,15 +115,13 @@ function operate(operand) {
 
 //choses the function to operate based on the operator
 function evaluate() {
-    for(let i = 0; i < cache.innerText.length; i++) {
-        if (currentOperator == "+" && cache.innerText.length > 1) {
-            add(previousNumber, currentNumber);
-        } else if (currentOperator == "-" && cache.innerText.length > 1) {
-            subtract(previousNumber, currentNumber);
-        } else if (currentOperator == "x" && cache.innerText.length > 1) {
-            multiply(previousNumber, currentNumber);
-        } else if (currentOperator == "/" && cache.innerText.length > 1) {
-            divide(previousNumber, currentNumber);
-        }
-    } 
+    if (currentOperator == "+" && cache.innerText.length > 1) {
+        add(previousNumber, currentNumber);
+    } else if (currentOperator == "-" && cache.innerText.length > 1) {
+        subtract(previousNumber, currentNumber);
+    } else if (currentOperator == "x" && cache.innerText.length > 1) {
+        multiply(previousNumber, currentNumber);
+    } else if (currentOperator == "/" && cache.innerText.length > 1) {
+        divide(previousNumber, currentNumber);
+    }
 }
