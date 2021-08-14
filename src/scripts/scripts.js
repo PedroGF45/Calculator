@@ -126,12 +126,16 @@ function operate(operand) {
             }
             break;
         case "square":
-            let base = previousNumber;
+            cache.innerText = `sqr(${previousNumber})`;
             previousNumber = Number(previousNumber) * Number(previousNumber);
-            cache.innerText = `sqr(${base})`;
             display.innerText = previousNumber;
-            console.log(previousNumber);
             break;
+        case "root":
+            cache.innerHTML = `&#8730;${previousNumber}`;
+            previousNumber = Math.sqrt(Number(previousNumber));
+            display.innerText = previousNumber;
+            break;
+            
     }
 }
 
