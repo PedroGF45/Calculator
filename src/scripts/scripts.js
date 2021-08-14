@@ -1,3 +1,4 @@
+//resolver bug de multiplicaçao e divisão
 
 const defaultNumber = null;
 let currentNumber = "";
@@ -20,8 +21,6 @@ function updateOperator(signal) {
         previousOperator = previousOperator.substring(1);
     }
     cache.innerText = `${previousNumber}${previousOperator}`;
-    console.log(`current operator is "${currentOperator}"`);
-    console.log(`previous operator is "${previousOperator}"`);
 }
 
 //Get numbers and operators
@@ -30,11 +29,18 @@ let number = document.querySelectorAll(".number");
 let display = document.getElementById("input");
 let cache = document.getElementById("cache");
 const clear = document.getElementById("clear");
+const back = document.getElementById("back");
 
 //Add listener onclick and sends the respective function
 operator.forEach(operator => operator.addEventListener("click", () => operate(operator.getAttribute("id"))));
 number.forEach(number => number.addEventListener("click", () => updateDisplay(number.getAttribute("value"))));
 clear.addEventListener("click", clearDisplay);
+back.addEventListener("click", backDisplay);
+
+function backDisplay() {
+    display.innerText = display.innerText.slice(0, -1);
+    previousOperator == "" ? previousNumber = previousNumber.slice(0, -1) : currentNumber = currentNumber.slice(0, -1);
+}
 
 //Clear function
 function clearDisplay() {
