@@ -75,9 +75,13 @@ function divide(a, b){
 
 function getResult(result) {
     display.innerText = result;
+    if (previousOperator == "=") {
+        cache.innerText = `${previousNumber}${currentOperator}${currentNumber}=${result}`;
+    } else {
+        cache.innerText = `${result}${previousOperator}`;
+    }
     previousNumber = result;
-    currentNumber = "";
-    cache.innerText = `${result}${previousOperator}`;
+    currentNumber = ""; 
 }
 
 //choses the operation based on id of the button clicked
@@ -99,12 +103,16 @@ function operate(operand) {
             updateOperator("/");
             evaluate();
             break;
+        case "equal":
+            updateOperator("=");
+            evaluate();
+            break;
     }
 }
 
 //choses the function to operate based on the operator
 function evaluate() {
-    if (currentOperator == "+" && cache.innerText.length > 1) {
+    if (currentOperator == "+" && cache.innerText.length > 1 || (currentOperator == "+" && previousOperator == "=")) {
         add(previousNumber, currentNumber);
     } else if (currentOperator == "-" && cache.innerText.length > 1) {
         subtract(previousNumber, currentNumber);
