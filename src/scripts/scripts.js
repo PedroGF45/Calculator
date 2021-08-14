@@ -1,6 +1,3 @@
-//resolver bug de multiplicaçao e divisão
-
-const defaultNumber = null;
 let currentNumber = "";
 let previousNumber = "";
 
@@ -109,6 +106,7 @@ function operate(operand) {
             evaluate();
             break;
         case "plusOrMinus":
+            //adds and removes "-" based on appearence
             if (previousOperator == "") {
                 if (!previousNumber.includes("-")) {
                     display.innerText = "-" + display.innerText;
@@ -126,8 +124,14 @@ function operate(operand) {
                     currentNumber = currentNumber.substr(1);
                 }
             }
+            break;
+        case "square":
+            let base = previousNumber;
+            previousNumber = Number(previousNumber) * Number(previousNumber);
+            cache.innerText = `sqr(${base})`;
+            display.innerText = previousNumber;
             console.log(previousNumber);
-            console.log(currentNumber);
+            break;
     }
 }
 
