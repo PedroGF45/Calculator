@@ -6,6 +6,9 @@ let previousOperator = "";
 
 //updates the number in the display bottom portion
 function updateDisplay(value) {
+    if (previousOperator == "=") {
+        clearDisplay(); 
+    }
     previousOperator != "" ? currentNumber += `${value}` : previousNumber += `${value}`;
     previousOperator != "" ? display.innerText = currentNumber : display.innerText += `${value}`;
 }
@@ -35,8 +38,10 @@ clear.addEventListener("click", clearDisplay);
 back.addEventListener("click", backDisplay);
 
 function backDisplay() {
-    display.innerText = display.innerText.slice(0, -1);
-    previousOperator == "" ? previousNumber = previousNumber.slice(0, -1) : currentNumber = currentNumber.slice(0, -1);
+    if (previousOperator != "=") {
+        display.innerText = display.innerText.slice(0, -1);
+        previousOperator == "" ? previousNumber = previousNumber.slice(0, -1) : currentNumber = currentNumber.slice(0, -1);
+    }
 }
 
 //Clear function
@@ -135,7 +140,6 @@ function operate(operand) {
             previousNumber = Math.sqrt(Number(previousNumber));
             display.innerText = previousNumber;
             break;
-            
     }
 }
 
