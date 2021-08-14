@@ -54,37 +54,26 @@ function clearDisplay() {
 
 //operator functions
 function add(a, b) {
-    console.log(`a is ${a}`);
-    console.log(`b is ${b}`);
     let result = (Number(a) + Number(b));
-    display.innerText = result;
-    previousNumber = result;
-    console.log(`result is ${result}`);
-    currentNumber = "";
-    cache.innerText = `${result}${previousOperator}`;
+    getResult(result);
 }
 
 function subtract(a, b) {
     let result = (Number(a) - Number(b));
-    display.innerText = result;
-    previousNumber = result;
-    currentNumber = "";
-    cache.innerText = `${result}${previousOperator}`;
+    getResult(result);
 }
 
 function multiply(a, b) {
-    console.log(`a is ${a}`);
-    console.log(`b is ${b}`);
     let result = (Number(a) * Number(b));
-    display.innerText = result;
-    previousNumber = result;
-    console.log(`result is ${result}`);
-    currentNumber = "";
-    cache.innerText = `${result}${previousOperator}`;
+    getResult(result);
 }
 
 function divide(a, b){
     let result = (Number(a) / Number(b));
+    getResult(result);
+}
+
+function getResult(result) {
     display.innerText = result;
     previousNumber = result;
     currentNumber = "";
