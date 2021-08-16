@@ -28,14 +28,43 @@ let operator = document.querySelectorAll(".operator");
 let number = document.querySelectorAll(".number");
 let display = document.getElementById("input");
 let cache = document.getElementById("cache");
+const decimal = document.getElementById("decimal");
 const clear = document.getElementById("clear");
 const back = document.getElementById("back");
 
 //Add listener onclick and sends the respective function
 operator.forEach(operator => operator.addEventListener("click", () => operate(operator.getAttribute("id"))));
 number.forEach(number => number.addEventListener("click", () => updateDisplay(number.getAttribute("value"))));
+
+//add listener to keyboard
+window.addEventListener("keydown", function (event) {
+    console.log(event.key);
+    //if (typeof event.key)
+    switch (event.key) {
+        case "crl":
+            console.log("é um crl");
+            break;
+    }
+})
+
+
+
+
+
+
+decimal.addEventListener("click", addDecimal);
 clear.addEventListener("click", clearDisplay);
 back.addEventListener("click", backDisplay);
+
+function addDecimal() {
+    if (previousOperator == "" && !display.innerText.includes(".")) {
+        display.innerText += ".";
+        previousNumber += ".";
+    } else if (!display.innerText.includes(".")){
+        display.innerText += ".";
+        currentNumber += ".";
+    }
+}
 
 function backDisplay() {
     if (previousOperator != "=") {
