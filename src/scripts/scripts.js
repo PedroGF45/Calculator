@@ -4,25 +4,6 @@ let previousNumber = "";
 let currentOperator = "";
 let previousOperator = "";
 
-//updates the number in the display bottom portion
-function updateDisplay(value) {
-    if (previousOperator == "=") {
-        clearDisplay(); 
-    }
-    previousOperator != "" ? currentNumber += `${value}` : previousNumber += `${value}`;
-    previousOperator != "" ? display.innerText = currentNumber : display.innerText += `${value}`;
-}
-
-//updates de current operator being used
-function updateOperator(signal) {
-    previousOperator += signal;
-    if (previousOperator.length > 1) {
-        currentOperator = previousOperator.split("")[0];
-        previousOperator = previousOperator.substring(1);
-    }
-    cache.innerText = `${previousNumber}${previousOperator}`;
-}
-
 //Get numbers and operators
 let operator = document.querySelectorAll(".operator");
 let number = document.querySelectorAll(".number");
@@ -32,54 +13,11 @@ const decimal = document.getElementById("decimal");
 const clear = document.getElementById("clear");
 const back = document.getElementById("back");
 
-//Add listener onclick and sends the respective function
-operator.forEach(operator => operator.addEventListener("click", () => operate(operator.getAttribute("id"))));
-number.forEach(number => number.addEventListener("click", () => updateDisplay(number.getAttribute("value"))));
-
-//add listener to keyboard
-window.addEventListener("keydown", function (event) {
-    if (event.defaultPrevented) {
-        return; // Do nothing if the event was already processed
-    }
-    if (event.key >= 0 && event.key <= 9) {
-        updateDisplay(event.key);
-    }
-    //if (typeof event.key)
-    switch (event.key) {
-        case "Enter":
-            operate("equal");
-            break;
-        case "-":
-            operate("minus");
-            break;
-        case "+":
-            operate("plus");
-            break;
-        case "*":
-            operate("multiply");
-            break;
-        case "/":
-            operate("divide");
-            break;
-        case ".":
-            addDecimal();
-            break;
-        case "Backspace":
-            backDisplay();
-            break;
-    }
-    event.preventDefault();
-}, true)
-
-
-
-
-
-
 decimal.addEventListener("click", addDecimal);
 clear.addEventListener("click", clearDisplay);
 back.addEventListener("click", backDisplay);
 
+//adds decimal point
 function addDecimal() {
     if (previousOperator == "" && !display.innerText.includes(".")) {
         display.innerText += ".";
@@ -90,11 +28,26 @@ function addDecimal() {
     }
 }
 
+//erase last number
 function backDisplay() {
     if (previousOperator != "=") {
         display.innerText = display.innerText.slice(0, -1);
         previousOperator == "" ? previousNumber = previousNumber.slice(0, -1) : currentNumber = currentNumber.slice(0, -1);
     }
+}
+
+
+//Add listener onclick and sends the respective function
+operator.forEach(operator => operator.addEventListener("click", () => operate(operator.getAttribute("id"))));
+number.forEach(number => number.addEventListener("click", () => updateDisplay(number.getAttribute("value"))));
+
+//updates the number in the display bottom portion
+function updateDisplay(value) {
+    if (previousOperator == "=") {
+        clearDisplay(); 
+    }
+    previousOperator != "" ? currentNumber += `${value}` : previousNumber += `${value}`;
+    previousOperator != "" ? display.innerText = currentNumber : display.innerText += `${value}`;
 }
 
 //Clear function
@@ -105,39 +58,6 @@ function clearDisplay() {
     previousNumber = "";
     currentOperator = "";
     previousOperator = "";
-}
-
-//operator functions
-function add(a, b) {
-    let result = (Number(a) + Number(b));
-    getResult(result);
-}
-
-function subtract(a, b) {
-    let result = (Number(a) - Number(b));
-    getResult(result);
-}
-
-function multiply(a, b) {
-    let result = (Number(a) * Number(b));
-    getResult(result);
-}
-
-function divide(a, b){
-    let result = (Number(a) / Number(b));
-    getResult(result);
-}
-
-//If the signal is equal display the equation on display.
-function getResult(result) {
-    display.innerText = result;
-    if (previousOperator == "=") {
-        cache.innerText = `${previousNumber}${currentOperator}${currentNumber}=${result}`;
-    } else {
-        cache.innerText = `${result}${previousOperator}`;
-    }
-    previousNumber = result;
-    currentNumber = ""; 
 }
 
 //choses the operation based on id of the button clicked
@@ -196,6 +116,16 @@ function operate(operand) {
     }
 }
 
+//updates de current operator being used
+function updateOperator(signal) {
+    previousOperator += signal;
+    if (previousOperator.length > 1) {
+        currentOperator = previousOperator.split("")[0];
+        previousOperator = previousOperator.substring(1);
+    }
+    cache.innerText = `${previousNumber}${previousOperator}`;
+}
+
 //choses the function to operate based on the operator
 function evaluate() {
     if (currentOperator == "+" && cache.innerText.length > 1 || (currentOperator == "+" && previousOperator == "=" && cache.innerText.length > 1)) {
@@ -208,3 +138,71 @@ function evaluate() {
         divide(previousNumber, currentNumber);
     }
 }
+
+//operator functions
+function add(a, b) {
+    let result = (Number(a) + Number(b));
+    getResult(result);
+}
+
+function subtract(a, b) {
+    let result = (Number(a) - Number(b));
+    getResult(result);
+}
+
+function multiply(a, b) {
+    let result = (Number(a) * Number(b));
+    getResult(result);
+}
+
+function divide(a, b){
+    let result = (Number(a) / Number(b));
+    getResult(result);
+}
+
+//If the signal is equal display the equation on display.
+function getResult(result) {
+    display.innerText = result;
+    if (previousOperator == "=") {
+        cache.innerText = `${previousNumber}${currentOperator}${currentNumber}=${result}`;
+    } else {
+        cache.innerText = `${result}${previousOperator}`;
+    }
+    previousNumber = result;
+    currentNumber = ""; 
+}
+
+//add listener to keyboard
+window.addEventListener("keydown", function (event) {
+    if (event.defaultPrevented) {
+        return; // Do nothing if the event was already processed
+    }
+    if (event.key >= 0 && event.key <= 9) { //gets input from 0 to 9
+        updateDisplay(event.key);
+    }
+    //if (typeof event.key)
+    switch (event.key) {
+        case "Enter":
+            operate("equal");
+            break;
+        case "-":
+            operate("minus");
+            break;
+        case "+":
+            operate("plus");
+            break;
+        case "*":
+            operate("multiply");
+            break;
+        case "/":
+            operate("divide");
+            break;
+        case ".":
+            addDecimal();
+            break;
+        case "Backspace":
+            backDisplay();
+            break;
+    }
+    event.preventDefault();
+}, true)
