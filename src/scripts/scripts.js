@@ -76,7 +76,7 @@ function operate(operand) {
             evaluate();
             break;
         case "divide":
-            updateOperator("/");
+            updateOperator("÷");
             evaluate();
             break;
         case "equal":
@@ -134,7 +134,7 @@ function evaluate() {
         subtract(previousNumber, currentNumber);
     } else if (currentOperator == "x" && cache.innerText.length > 1 || (currentOperator == "x" && previousOperator == "=" && cache.innerText.length > 1)) {
         multiply(previousNumber, currentNumber);
-    } else if (currentOperator == "/" && cache.innerText.length > 1 || (currentOperator == "/" && previousOperator == "=" && cache.innerText.length > 1)) {
+    } else if (currentOperator == "÷" && cache.innerText.length > 1 || (currentOperator == "/" && previousOperator == "=" && cache.innerText.length > 1)) {
         divide(previousNumber, currentNumber);
     }
 }
@@ -167,11 +167,11 @@ function divide(a, b){
 
 //If the signal is equal display the equation on display.
 function getResult(result) {
-    display.innerText = result;
+    display.innerText = Number(result).toFixed(2);
     if (previousOperator == "=") {
-        cache.innerText = `${previousNumber}${currentOperator}${currentNumber}=${result}`;
+        cache.innerText = `${Number(previousNumber).toFixed(2)}${currentOperator}${Number(currentNumber).toFixed(2)}=${Number(result).toFixed(2)}`;
     } else {
-        cache.innerText = `${result}${previousOperator}`;
+        cache.innerText = `${Number(result).toFixed(2)}${previousOperator}`;
     }
     previousNumber = result;
     currentNumber = ""; 
