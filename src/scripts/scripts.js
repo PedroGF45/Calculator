@@ -45,9 +45,10 @@ number.forEach(number => number.addEventListener("click", () => updateDisplay(nu
 function updateDisplay(value) {
     if (previousOperator == "=") {
         clearDisplay(); 
+    } else {
+        (previousOperator != "") ? currentNumber += `${value}` : previousNumber += `${value}`;
+        (previousOperator != "") ? display.innerText = currentNumber : display.innerText += `${value}`;
     }
-    previousOperator != "" ? currentNumber += `${value}` : previousNumber += `${value}`;
-    previousOperator != "" ? display.innerText = currentNumber : display.innerText += `${value}`;
 }
 
 //Clear function
