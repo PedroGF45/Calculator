@@ -157,7 +157,12 @@ function multiply(a, b) {
 
 function divide(a, b){
     let result = (Number(a) / Number(b));
-    getResult(result);
+    if (b == 0) {
+        display.innerText = "You can't divide by 0!";
+        cache.innerText = "";
+    } else {
+        getResult(result);
+    }
 }
 
 //If the signal is equal display the equation on display.
