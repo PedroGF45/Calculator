@@ -38,14 +38,38 @@ number.forEach(number => number.addEventListener("click", () => updateDisplay(nu
 
 //add listener to keyboard
 window.addEventListener("keydown", function (event) {
-    console.log(event.key);
+    if (event.defaultPrevented) {
+        return; // Do nothing if the event was already processed
+    }
+    if (event.key >= 0 && event.key <= 9) {
+        updateDisplay(event.key);
+    }
     //if (typeof event.key)
     switch (event.key) {
-        case "crl":
-            console.log("é um crl");
+        case "Enter":
+            operate("equal");
+            break;
+        case "-":
+            operate("minus");
+            break;
+        case "+":
+            operate("plus");
+            break;
+        case "*":
+            operate("multiply");
+            break;
+        case "/":
+            operate("divide");
+            break;
+        case ".":
+            addDecimal();
+            break;
+        case "Backspace":
+            backDisplay();
             break;
     }
-})
+    event.preventDefault();
+}, true)
 
 
 
