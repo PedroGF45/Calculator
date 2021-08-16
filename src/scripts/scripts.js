@@ -168,11 +168,17 @@ function divide(a, b){
 
 //If the signal is equal display the equation on display.
 function getResult(result) {
-    display.innerText = Number(result).toFixed(2);
+    console.log(result);
+    console.log(previousNumber);
+    console.log(currentNumber);
+    result % 1 == 0 ? a = result : a = result.toFixed(2);
+    Number(previousNumber) % 1 == 0 ? b = Number(previousNumber) : b = Number(previousNumber).toFixed(2);
+    Number(currentNumber) % 1 == 0 ? c = Number(currentNumber) : c = Number(currentNumber).toFixed(2);
+    display.innerText = a;
     if (previousOperator == "=") {
-        cache.innerText = `${Number(previousNumber).toFixed(2)}${currentOperator}${Number(currentNumber).toFixed(2)}=${Number(result).toFixed(2)}`;
+        cache.innerText = `${b}${currentOperator}${c}=${a}`;
     } else {
-        cache.innerText = `${Number(result).toFixed(2)}${previousOperator}`;
+        cache.innerText = `${a}${previousOperator}`;
     }
     previousNumber = result;
     currentNumber = ""; 
