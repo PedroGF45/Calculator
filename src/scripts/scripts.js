@@ -173,6 +173,7 @@ function divide(a, b){
 //If the signal is equal display the equation on display.
 function getResult(result) {
     result % 1 == 0 ? a = result : a = result.toFixed(2);
+    result.toString().length > 12 ? a = result.toExponential(1) : a = result;
     Number(previousNumber) % 1 == 0 ? b = Number(previousNumber) : b = Number(previousNumber).toFixed(2);
     Number(currentNumber) % 1 == 0 ? c = Number(currentNumber) : c = Number(currentNumber).toFixed(2);
     display.innerText = a;
