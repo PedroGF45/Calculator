@@ -1,3 +1,7 @@
+//display adaptation
+//overall style
+
+
 let currentNumber = "";
 let previousNumber = "";
 
@@ -48,7 +52,7 @@ function updateDisplay(value) {
     } else {
         (previousOperator != "") ? currentNumber += `${value}` : previousNumber += `${value}`;
         (previousOperator != "") ? display.innerText = currentNumber : display.innerText += `${value}`;
-    }
+    }     
 }
 
 //Clear function
@@ -168,9 +172,6 @@ function divide(a, b){
 
 //If the signal is equal display the equation on display.
 function getResult(result) {
-    console.log(result);
-    console.log(previousNumber);
-    console.log(currentNumber);
     result % 1 == 0 ? a = result : a = result.toFixed(2);
     Number(previousNumber) % 1 == 0 ? b = Number(previousNumber) : b = Number(previousNumber).toFixed(2);
     Number(currentNumber) % 1 == 0 ? c = Number(currentNumber) : c = Number(currentNumber).toFixed(2);
