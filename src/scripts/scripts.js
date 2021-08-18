@@ -1,7 +1,3 @@
-//display adaptation
-//overall style
-
-
 let currentNumber = "";
 let previousNumber = "";
 
@@ -220,3 +216,39 @@ window.addEventListener("keydown", function (event) {
     }
     event.preventDefault();
 }, true)
+
+//Dark mode
+//get variables
+const darkMode = document.getElementById("toggle");
+const body = document.body;
+const pMode = document.getElementById("mode");
+const calculator = document.getElementById("calculator");
+const displayCalculator = document.getElementById("display");
+const switchInput = document.getElementById("switch");
+const github = document.getElementById("github");
+
+darkMode.addEventListener("change", function(){
+    console.log(decimal);
+    if (darkMode.checked) {
+        body.classList.add("darkMode");
+        calculator.style.cssText = `background-color: white;`;
+        displayCalculator.style.cssText = `background-color: black;`;
+        number.forEach(number => number.classList.add("darkMode"));
+        operator.forEach(operator => operator.classList.add("darkModeOp"));
+        decimal.classList.remove("lightModeOp");
+        decimal.classList.add("darkModeOp");
+        pMode.innerText = "DARK";
+        github.style.cssText = `color: white`;
+      } else {
+        body.classList.remove("darkMode");
+        calculator.style.cssText = `background-color: black;`;
+        displayCalculator.style.cssText = `background-color: white;`;
+        number.forEach(number => number.classList.remove("darkMode"));
+        operator.forEach(operator => operator.classList.remove("darkModeOp"));
+        decimal.classList.remove("darkModeOp");
+        decimal.classList.add("lightModeOp");
+        pMode.innerText = "LIGHT";
+        github.style.cssText = `color: black`;
+      }
+});
+

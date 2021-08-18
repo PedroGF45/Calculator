@@ -1,4 +1,4 @@
-html, body {
+body {
     margin: 0 auto;
     font-family: sans-serif, serif;
     color: black;
@@ -60,7 +60,8 @@ button {
 
 #clear {
     grid-area: clear;
-    background-color: rgb(191, 64, 64)
+    background-color: rgb(191, 64, 64);
+    border: none;
 }
 
 #clear:hover {
@@ -70,6 +71,7 @@ button {
 #back {
     grid-area: back;
     background-color: rgb(204, 112, 51);
+    border: none;
 }
 
 #back:hover {
@@ -99,10 +101,6 @@ button {
 
 #equal {
     grid-area: equal;
-}
-
-#decimal {
-    background-color: rgb(209, 250, 250);
 }
 
 #decimal:hover {
@@ -171,10 +169,17 @@ button:hover {
 
 
 #switch {
-    display: flex;
-    justify-content: center;
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
     margin-top: -15px;
 }
+
+#switch p {
+    margin-top: 5px;
+    letter-spacing: 5px;
+}
+
 
 /* The switch - the box around the slider */
 .switch {
@@ -199,7 +204,7 @@ button:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: black;
     -webkit-transition: .3s;
     transition: .3s;
 }
@@ -217,6 +222,10 @@ button:hover {
 }
   
 input:checked + .slider {
+    background-color: white;
+}
+
+input:checked + .slider:before {
     background-color: black;
 }
   
@@ -237,4 +246,37 @@ input:checked + .slider:before {
   
 .slider.round:before {
     border-radius: 50%;
+}
+
+/* Dark mode styles */
+.darkMode {
+    background-color: black;
+    color:white;
+    border: none;
+}
+
+.number.darkMode:hover {
+    background-color: rgb(78, 81, 82);
+}
+
+.darkModeOp {
+    background-color: rgb(152, 157, 158);
+    color: black;
+    border: none;
+}
+
+.lightModeOp {
+    background-color: rgb(209, 250, 250);
+}
+
+@media screen and (max-width: 600px) {
+    h1 {
+        margin-top: 15px;
+        margin-bottom: -30px;
+        font-size: 20px;
+    }
+
+    #copyright {
+        margin-top: 5%;
+    }
 }
